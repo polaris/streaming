@@ -5,7 +5,6 @@
 #define __TRANSMITTER_H
 
 #include <boost/asio.hpp>
-
 #include <thread>
 
 class Packet;

@@ -5,7 +5,6 @@
 #define __UTILS_H
 
 #include <alsa/asoundlib.h>
-
 #include <cstdint>
 #include <ctime>
 
