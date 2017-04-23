@@ -1,3 +1,6 @@
+// © 2017 Jan Deinhard.
+// Distributed under the BSD license.
+
 #include "Transmitter.h"
 #include "PacketPool.h"
 #include "Packet.h"

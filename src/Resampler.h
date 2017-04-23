@@ -1,11 +1,21 @@
+// © 2017 Jan Deinhard.
+// Distributed under the BSD license.
+
 #ifndef __RESAMPLER_H
 #define __RESAMPLER_H
 
 #include <cassert>
 #include <samplerate.h>
 
+/** A simple wrapper around libsamplerate.
+ */
 class Resampler {
 public:
+    /** Constructor
+     *
+     *  \param periodSize the size of a period in frames.
+     *  \param channels the number of channels per frame.
+     */
     Resampler(unsigned int periodSize, unsigned int channels)
     : periodSize_(periodSize)
     , channels_(channels)
@@ -24,6 +34,8 @@ public:
         outputBufferShort = new short [periodSize_ * channels_ * 2];
     }
 
+    /** Destructor.
+     */
     ~Resampler() {
         if (state_ != nullptr) {
             src_delete(state_);
@@ -39,10 +51,16 @@ public:
         }
     }
 
+    /** Sets the resampling ratio.
+     *
+     *  \param ratio the new resampling ratio.
+     */
     void setRatio(double ratio) {
         ratio_ = ratio;
     }
 
+    /** Converts the sample rate of a period of audio data.
+     */
     void convert(int16_t* data) {
         src_short_to_float_array(data, inputBufferFloat, periodSize_ * channels_);
         SRC_DATA srcData;
@@ -58,23 +76,27 @@ public:
         framesGenerated_ = srcData.output_frames_gen;
     }
 
+    /** Returns the number of generated frames.
+     */
     unsigned int getFramesGenerated() const {
         return framesGenerated_;
     }
 
+    /** Returns a pointer to the output data.
+     */
     short* getOutput() const {
         return outputBufferShort;
     }
 
 private:
-    const unsigned int periodSize_;
-    const unsigned int channels_;
-    SRC_STATE* state_;
-    float* inputBufferFloat;
-    float* outputBufferFloat;
-    short* outputBufferShort;
-    double ratio_;
-    unsigned int framesGenerated_;
+    const unsigned int periodSize_;     /**< The period size in frames.         */
+    const unsigned int channels_;       /**< The number of channels in a frame. */
+    SRC_STATE* state_;                  /**< The state of libsamplerate.        */
+    float* inputBufferFloat;            /**< A pointer to an array of float for the input data.     */
+    float* outputBufferFloat;           /**< A pointer to an array of float for the output data.    */
+    short* outputBufferShort;           /**< A pointer to an array of short for the output data.    */
+    double ratio_;                      /**< The current resampling ratio.      */
+    unsigned int framesGenerated_;      /**< The number of generated frames.    */
 };
 
 #endif  // __RESAMPLER_H

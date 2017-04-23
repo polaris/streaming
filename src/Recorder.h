@@ -1,3 +1,6 @@
+// © 2017 Jan Deinhard.
+// Distributed under the BSD license.
+
 #ifndef __RECORDER_H
 #define __RECORDER_H
 
@@ -44,8 +47,6 @@ private:
     const unsigned int periodSize_;
     const unsigned int channels_;
     const Mode mode_;
-
-    uint16_t sequenceNumber_;
 
     Transmitter& transmitter_;
 

@@ -1,3 +1,6 @@
+// © 2017 Jan Deinhard.
+// Distributed under the BSD license.
+
 #include "Player.h"
 #include "CircularBuffer.h"
 #include "Utils.h"

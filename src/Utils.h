@@ -1,3 +1,6 @@
+// © 2017 Jan Deinhard.
+// Distributed under the BSD license.
+
 #ifndef __UTILS_H
 #define __UTILS_H
 
@@ -24,12 +27,12 @@ struct timeinfo {
     unsigned int k1_;
 };
 
-uint64_t timespec_us(const struct timespec *ts);
-
-int64_t frames_us(unsigned int sample_rate, snd_pcm_sframes_t frames);
-
+/** Returns the current value of the specified clock in microseconds.
+ */
 uint64_t read_clock(clockid_t clock);
 
+/** Returns the current real-time in microseconds.
+ */
 double get_time();
 
 #endif  // __UTILS_H

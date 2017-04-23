@@ -1,3 +1,6 @@
+// © 2017 Jan Deinhard.
+// Distributed under the BSD license.
+
 #include "Recorder.h"
 #include "Transmitter.h"
 #include "Packet.h"
@@ -15,7 +18,6 @@ Recorder::Recorder(const std::string& deviceName, unsigned int sampleRate, unsig
 , periodSize_(static_cast<unsigned int>(std::round(sampleRate_ * 0.000001 * periodTime_)))
 , channels_(channels)
 , mode_(mode)
-, sequenceNumber_(0)
 , transmitter_(transmitter)
 , pool_(pool)
 , pcm_(nullptr)
@@ -303,7 +305,6 @@ int Recorder::capture() {
 
             Packet* packet = pool_.pop();
             if (packet != nullptr) {
-                packet->setSequenceNumber(sequenceNumber_++);
                 packet->setTimestamp(sample + error);
                 auto data = reinterpret_cast<int16_t*>(packet->data_);
                 if (mode_ == Mode::Click) {

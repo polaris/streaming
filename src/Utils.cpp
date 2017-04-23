@@ -1,13 +1,12 @@
+// © 2017 Jan Deinhard.
+// Distributed under the BSD license.
+
 #include "Utils.h"
 #include <cmath>
 #include <iostream>
 
 uint64_t timespec_us(const struct timespec *ts) {
     return ts->tv_sec * 1000000LLU + ts->tv_nsec / 1000LLU;
-}
-
-int64_t frames_us(unsigned int sample_rate, snd_pcm_sframes_t frames) {
-    return static_cast<int64_t>((1.0 / sample_rate) * static_cast<float>(1000000 * frames));
 }
 
 uint64_t read_clock(clockid_t clock) {
