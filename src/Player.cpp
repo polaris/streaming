@@ -10,7 +10,9 @@
 #include <fstream>
 #include <cmath>
 
-Player::Player(const std::string& deviceName, unsigned int sampleRate, unsigned int periodTime, unsigned int channels, unsigned int latency, CircularBuffer& buffer, moodycamel::ReaderWriterQueue<timeinfo>& q, std::atomic<bool>& streaming)
+Player::Player(const std::string& deviceName, unsigned int sampleRate, unsigned int periodTime, 
+    unsigned int channels, unsigned int latency, CircularBuffer& buffer, 
+    moodycamel::ReaderWriterQueue<double>& q, std::atomic<bool>& streaming)
 : deviceName_(deviceName)
 , sampleRate_(sampleRate)
 , periodTime_(periodTime)
@@ -306,7 +308,7 @@ int Player::playback() {
 
             nextSample = sample + periodSize_;
 
-            timeInfoQueue_.try_enqueue(timeinfo(dll.t1(), periodSize_));
+            timeInfoQueue_.try_enqueue(dll.t1());
             
             if (!streaming_) {
                 streaming_ = true;

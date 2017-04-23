@@ -43,7 +43,7 @@ public:
      */
     Receiver(const std::string& address, unsigned short port, unsigned int sampleRate,
         unsigned int periodTime, unsigned int periodSize, unsigned int channels, unsigned int latency,
-        CircularBuffer& buffer, ReaderWriterQueue<timeinfo>& queue, std::atomic<bool>& streaming);
+        CircularBuffer& buffer, ReaderWriterQueue<double>& queue, std::atomic<bool>& streaming);
 
     /** Destructor.
      */
@@ -79,7 +79,7 @@ private:
     double ratio_;                          /**< The current resampling ratio.                      */
     double tA0, tA1;                        /**< The last and the next timestamps from the audio thread.    */
     unsigned int kA0, kA1;                  /**< The last and the next sample count from the audio thread.  */
-    ReaderWriterQueue<timeinfo>& timeInfoQueue_;    /**< The time info queue used to retrieve timestamps from the audio thread. */
+    ReaderWriterQueue<double>& timeInfoQueue_;    /**< The time info queue used to retrieve timestamps from the audio thread. */
     DelayLockedLoop dll_;                   /**< The delay-locked loop for the network thread.      */
     ResampleRatioEstimator est_;            /**< The estimator for the resampling ratio.            */
     double err_;                            /**< The current delay error.                           */

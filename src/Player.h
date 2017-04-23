@@ -31,7 +31,7 @@ public:
      */
     Player(const std::string& deviceName, unsigned int sampleRate, unsigned int periodTime,
      unsigned int channels, unsigned int latency, CircularBuffer& buffer, 
-     moodycamel::ReaderWriterQueue<timeinfo>& timeInfoQueue, std::atomic<bool>& streaming);
+     moodycamel::ReaderWriterQueue<double>& timeInfoQueue, std::atomic<bool>& streaming);
 
     Player(const Player&) = delete;
     Player& operator =(const Player&) = delete;
@@ -82,12 +82,12 @@ private:
     const unsigned int channels_;       /**< The number of channels per period. */
     const unsigned int latency_;        /**< The target latency in periods.     */
 
-    CircularBuffer& buffer_;                                    /**< The circular buffer.   */
-    std::atomic<bool>& streaming_;                              /**< The streaming flag.    */
-    moodycamel::ReaderWriterQueue<timeinfo>& timeInfoQueue_;    /**< The queues used to send time info to the network thread. */
-    snd_pcm_t* pcm_;                                            /**< ALSA handle.           */
-    std::unique_ptr<std::thread> thread_;                       /**< The internal audio thread. */
-    std::atomic<bool> running_;                                 /**< True if the player is started, otherwise false. */
+    CircularBuffer& buffer_;                               /**< The circular buffer.   */
+    std::atomic<bool>& streaming_;                         /**< The streaming flag.    */
+    moodycamel::ReaderWriterQueue<double>& timeInfoQueue_; /**< The queues used to send time info to the network thread. */
+    snd_pcm_t* pcm_;                                       /**< ALSA handle.           */
+    std::unique_ptr<std::thread> thread_;                  /**< The internal audio thread. */
+    std::atomic<bool> running_;                            /**< True if the player is started, otherwise false. */
 };
 
 #endif  // __PLAYER_H

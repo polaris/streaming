@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
         const auto periodSize = static_cast<unsigned int>(std::ceil(sampleRate * 0.000001 * periodTime));
 
         std::atomic<bool> streaming(false);
-        ReaderWriterQueue<timeinfo> timeinfoQueue(10);
+        ReaderWriterQueue<double> timeinfoQueue(10);
         CircularBuffer buffer(periodSize, channels, latency);
 
         Receiver receiver(address, port, sampleRate, periodTime, periodSize, 

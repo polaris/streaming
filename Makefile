@@ -1,7 +1,7 @@
 OBJDIR := obj
 
-CFLAGS := -O3 -Wall -pedantic -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts \
-	-Wcomment -Wconversion -Wdisabled-optimization -Wfloat-equal -Wformat -Wformat=2 \
+CFLAGS := -O3 -Wall -pedantic -pedantic-errors -Wextra -Wcast-qual -Wchar-subscripts \
+	-Wcomment -Wdisabled-optimization -Wfloat-equal -Wformat -Wformat=2 \
 	-Wformat-nonliteral -Wformat-security -Wformat-y2k -Wimport -Winit-self -Winvalid-pch \
 	-Wmissing-braces -Wmissing-field-initializers -Wmissing-format-attribute \
 	-Wmissing-include-dirs -Wmissing-noreturn -Wparentheses -Wpointer-arith -Wredundant-decls \

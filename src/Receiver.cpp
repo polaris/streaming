@@ -15,7 +15,7 @@
 
 Receiver::Receiver(const std::string& mcastgroup, unsigned short port, unsigned int sampleRate,
     unsigned int periodTime, unsigned int periodSize, unsigned int channels, unsigned int latency,
-    CircularBuffer& buffer, ReaderWriterQueue<timeinfo>& queue, std::atomic<bool>& streaming)
+    CircularBuffer& buffer, ReaderWriterQueue<double>& queue, std::atomic<bool>& streaming)
 : mcastgroup_(mcastgroup)
 , port_(port)
 , periodTime_(periodTime)
@@ -98,12 +98,12 @@ void Receiver::receive() {
             if (streaming_) {
                 const double tN = dll_.t0();
 
-                timeinfo ti;
-                if (timeInfoQueue_.try_dequeue(ti)) {
+                double t1;
+                if (timeInfoQueue_.try_dequeue(t1)) {
                     tA0 = tA1;
                     kA0 = kA1;
-                    tA1 = ti.t1_;
-                    kA1 += ti.k1_;
+                    tA1 = t1;
+                    kA1 += periodSize_;
                 }
 
                 double tD = tN - tA0;
