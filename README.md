@@ -1,4 +1,4 @@
-# streamer
+# streaming
 
 A prototypical streaming system with focus on synchronized playback on multiple receivers.
 

@@ -2,6 +2,7 @@
 // Distributed under the BSD license.
 
 #include "Utils.h"
+
 #include <cmath>
 #include <iostream>
 
