@@ -75,6 +75,11 @@ int main(int argc, char* argv[]) {
         pause();
 
         recorder.stop();
+
+        for (int i = 0; i < 5; ++i) {
+            auto packet = pool.pop();
+            delete packet;
+        }
     } catch (const std::exception& ex) {
         std::cerr << "Exception: " << ex.what() << "\n";
     }
